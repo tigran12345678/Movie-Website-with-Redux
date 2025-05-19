@@ -1,76 +1,62 @@
-import {auth, googleProvider} from "../config/firebase"
-import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { auth, googleProvider } from "../config/firebase";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 
+export default function Login() {
+  const [email, setEmail]       = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError]       = useState<string | null>(null);
+  const navigate = useNavigate();
 
+  const handleEmailSignIn = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/mainPage", { replace: true });
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
 
-function Login() {
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      navigate("/mainPage", { replace: true });
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+  return (
+    <div className="loginForm">
+      <h1>Welcome</h1>
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-    const signIn = async() => {
-      try{
-        await createUserWithEmailAndPassword(auth, email, password);
-      }
-        catch(err){
-          console.log(`Oops, error ${err}`);
-        }
-    };
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Enter your email"
+        autoComplete="email"
+      />
+      <br />
 
-      const signInWithGoogle = async() => {
-      try{
-        await signInWithPopup(auth, googleProvider);
-      }
-        catch(err){
-          console.log(`Oops, error ${err}`);
-        }
-
-    };
-
-    
-    const logOut = async() => {
-      try{
-        await signOut(auth);
-      }
-        catch(err){
-          console.log(`Oops, error ${err}`);
-        }
-    };
-
-
-
-    return (
-      <div className="loginForm">
-        <h1>Welcome</h1>
-        <input 
-          type="text" 
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your E-mail" />
-        <br />
-        <input 
-        type="text" 
+      <input
+        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Enter your password" 
-        
-        />
-        
-        <br />
-        
-        <button onClick={signIn}> Enter </button>
-        
-        <br />
+        placeholder="Enter your password"
+        autoComplete="current-password"
+      />
+      <br />
 
-        <button onClick = {signInWithGoogle} >Sign in with Google</button>
+      <button onClick={handleEmailSignIn}>Log In</button>
+      <br />
 
-        <br />
-
-        <button onClick = {logOut}>Log out</button>
-      </div>
-    );
-  }
-  
-  export default Login;
-  
+      <button onClick={handleGoogleSignIn}>Sign in with Google</button>
+    </div>
+  );
+}
