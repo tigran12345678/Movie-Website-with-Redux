@@ -7,24 +7,38 @@ import { useNavigate } from "react-router-dom";
 import { LOGIN_PATH } from "../../paths/Paths";
 // import type { RootState } from "@reduxjs/toolkit/query";
 import './MainPage.css';
-import Pagination from "../../Pagination/Pagination";
+import Pagination from "../../Pagination/Pagination.tsx";
 
 
 function DrawMovies() {
   const [userInput, setUserInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+
+  const postsPerPage = 20;
+
   const dispatch = useDispatch();
-
   const { data: popularMovies } = useDrawPopularMoviesQuery(currentPage);
-  const { data: foundMovies } = useLookForMovieQuery(userInput);
-
-  const navigate = useNavigate();
-  const userId = useSelector((state: RootState) => state.auth.userToken);
+  const { data: foundMovies } = useLookForMovieQuery({query: userInput, page: currentPage});
 
   const response = userInput ? foundMovies : popularMovies;
-  const movies = response?.results ?? [];
+  let movies = response?.results ?? [];
+
+  const normalizedMovies = movies.map(movie => {
+    const title = movie.original_title.length > 20
+      ? movie.original_title.slice(0, 20) + "..."
+      : movie.original_title;
+
+    return {
+      ...movie,
+      original_title: title,
+    };
+  });
 
 
+  // const indexOfLast = currentPage * postsPerPage;
+  // const indexOfFirst = indexOfLast - postsPerPage;
+
+  // const currentMovies = normalizedMovies.slice(indexOfFirst, indexOfLast);
 
 
   function handleFavorites(id: number) {
@@ -42,24 +56,25 @@ function DrawMovies() {
       <input
         type="text"
         value={userInput}
-        onChange={(event) => setUserInput(event.target.value)}
+        onChange={(event) => {
+          setUserInput(event.target.value)
+          setCurrentPage(1);
+        }}
       />
-      <div className = "Movies">
-
-      
-      {movies.map((movie) => (
-        <div className="Movie">
-          <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt="movie Poster" />
-          <p key={movie.id}>{movie.original_title}</p>
-          <button onClick={() => handleFavorites(movie.id)}> Add to Favorites</button>
-        </div>
-      ))}
+      <div className="Movies">
+        {normalizedMovies.map((movie) => (
+          <div className="Movie">
+            <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt="movie Poster" />
+            <p key={movie.id}>{movie.original_title}</p>
+            <button onClick={() => handleFavorites(movie.id)}> Add to Favorites</button>
+          </div>
+        ))}
       </div>
-      <Pagination 
-      totalPosts={100}
-      postsPerPage={20}
-      setCurrentPage={setCurrentPage}
-      ></Pagination>
+      <Pagination
+        totalPosts={400}
+        postsPerPage={postsPerPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }

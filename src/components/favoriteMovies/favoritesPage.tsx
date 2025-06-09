@@ -24,7 +24,7 @@ function FavoriteMovies() {
         <div >
             <div className = "Movies">
             {movies.map((movie) => (
-                <div>
+                <div className="Movie">
                     <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt="" />
                     <p>{movie.original_title} </p>
                     <button onClick={() => handleRemove(movie)}>Remove from Favorites</button>
