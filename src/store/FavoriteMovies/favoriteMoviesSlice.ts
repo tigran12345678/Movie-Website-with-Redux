@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
-
 const persisted = localStorage.getItem("favorites");
 const initialState = {
   favoriteMovies: persisted ? JSON.parse(persisted) : []
@@ -18,7 +16,7 @@ const favoriteMoviesSlice = createSlice({
             state.favoriteMovies.push(action.payload);
             localStorage.setItem('favorites', JSON.stringify(state.favoriteMovies));
         },
-         removeFromFavorites: (state, action) => {
+      removeFromFavorites: (state, action) => {
       state.favoriteMovies = state.favoriteMovies.filter(
         (movie) => movie.id !== action.payload.id
       );

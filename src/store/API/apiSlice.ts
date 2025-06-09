@@ -9,8 +9,8 @@ export const apiSlice = createApi({
     }),
     endpoints: (builder) => {
         return {
-            drawPopularMovies: builder.query({
-                query: () => `movie/popular?api_key=${API_KEY}&language=en-US&page=1`
+            drawPopularMovies: builder.query<{results: any[]; page: number; totalPages: number}, number> ({
+                query: (page = 1) => `movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`
             }),
             lookForMovie: builder.query({
                 query: (input) => `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${input}`
@@ -20,7 +20,4 @@ export const apiSlice = createApi({
 })
 
 
-export const {
-  useDrawPopularMoviesQuery,
-  useLookForMovieQuery,
-} = apiSlice;
+export const {useDrawPopularMoviesQuery, useLookForMovieQuery,} = apiSlice;

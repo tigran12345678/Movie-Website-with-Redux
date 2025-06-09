@@ -1,0 +1,23 @@
+.Movies{
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+}
+
+.Movie{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.Movie img{
+  width: 170px;
+  height: 300px;
+  border-radius: 10px;
+}
+
+.Movie button{
+  width: 160px;
+  height: 60px;
+}
