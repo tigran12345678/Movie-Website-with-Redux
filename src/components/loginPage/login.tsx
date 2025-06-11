@@ -5,8 +5,8 @@ import { signInWithEmailAndPassword, signInWithPopup} from "firebase/auth";
 import { HOME_PATH, MAINPAGE_PATH } from "../../paths/Paths";
 import { setCurrentUser } from "../../store/Authentication/authSlice";
 import { useDispatch } from "react-redux";
-import { Button } from "antd";
-
+import { Button, Input } from "antd";
+import './Login.css'
 
 export default function Login() {
   const [email, setEmail]       = useState("");
@@ -43,7 +43,7 @@ export default function Login() {
       <h1>Welcome</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <input
+      <Input
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -52,7 +52,7 @@ export default function Login() {
       />
       <br />
 
-      <input
+      <Input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}

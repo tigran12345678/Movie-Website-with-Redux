@@ -1,24 +1,32 @@
-.Movies{
+.Movies {
+  padding-top: 50px;
   display: flex;
   flex-flow: row wrap;
   gap: 15px;
   margin-bottom: 50px;
 }
 
-.Movie{
+.Movie {
   display: flex;
   flex-flow: column;
   align-items: center;
   gap: 10px;
 }
 
-.Movie img{
+.Movie img {
   width: 190px;
   height: 300px;
   border-radius: 10px;
 }
 
-.Movie button{
+.Movie button {
   width: 160px;
   height: 60px;
+}
+
+.Navigation {
+  display: flex;
+  padding: 25px;
+  flex-flow: row;
+  gap: 10px;
 }

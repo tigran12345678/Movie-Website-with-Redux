@@ -20,7 +20,7 @@ function Layout({children}: LayoutProps){
 
   function handleLogOut(){
     sessionStorage.clear();
-    navigate(LOGIN_PATH)
+    navigate(LOGIN_PATH, { replace: true });
   }
 
 
@@ -32,7 +32,6 @@ function Layout({children}: LayoutProps){
         Favorites 
        </button>
      
-        
         <button onClick={() => navigate(MAINPAGE_PATH)}> 
         Main Page
         </button>

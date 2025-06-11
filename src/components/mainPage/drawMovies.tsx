@@ -8,6 +8,7 @@ import { LOGIN_PATH } from "../../paths/Paths";
 // import type { RootState } from "@reduxjs/toolkit/query";
 import './MainPage.css';
 import Pagination from "../../Pagination/Pagination.tsx";
+import { Input } from "antd";
 
 
 function DrawMovies() {
@@ -53,8 +54,9 @@ function DrawMovies() {
 
   return (
     <div >
-      <input
+      <Input
         type="text"
+        style={{width: 200}}
         value={userInput}
         onChange={(event) => {
           setUserInput(event.target.value)
