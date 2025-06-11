@@ -1,4 +1,4 @@
-import { Form, Button } from "antd";
+import {  Button } from "antd";
 import { useNavigate } from "react-router";
 import { LOGIN_PATH, SIGNUP_PATH } from "../../paths/Paths";
 import "./HomePage.css";

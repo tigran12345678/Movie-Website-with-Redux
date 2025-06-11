@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+
 import { MAINPAGE_PATH, 
   FAVORITEMOVIES_PATH,
   LOGIN_PATH,

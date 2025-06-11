@@ -59,7 +59,7 @@ function SignUp() {
                 </Form.Item>
 
 
-                <button onClick={handleAccountCreation}>Create an account</button>
+                <Button onClick={handleAccountCreation}>Create an account</Button>
 
 
             </Form>

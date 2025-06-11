@@ -2,12 +2,8 @@ import type { AppDispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromFavorites, clearFavorites } from "../../store/FavoriteMovies/favoriteMoviesSlice";
 import './FavoriteMovies.css';
+import type { Movie } from "../../types";
 
-
-interface Movie {
-    original_title: string,
-    poster_path: string
-}
 
 
 function FavoriteMovies() {
