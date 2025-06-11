@@ -1,17 +1,23 @@
-import type { RootState } from "../../store/store";
+import type { AppDispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromFavorites, clearFavorites } from "../../store/FavoriteMovies/favoriteMoviesSlice";
 import './FavoriteMovies.css';
 
 
+interface Movie {
+    original_title: string,
+    poster_path: string
+}
+
+
 function FavoriteMovies() {
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const movies = useSelector((state: RootState) => state.favoriteMovies.favoriteMovies);
 
 
 
-    function handleRemove(movie) {
+    function handleRemove(movie: Movie) {
         dispatch(removeFromFavorites(movie));
     }
 
@@ -23,7 +29,7 @@ function FavoriteMovies() {
     return (
         <div >
             <div className = "Movies">
-            {movies.map((movie) => (
+            {movies.map((movie: Movie) => (
                 <div className="Movie">
                     <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt="" />
                     <p>{movie.original_title} </p>
