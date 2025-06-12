@@ -1,14 +1,18 @@
+
+
+
 .form{
     display: flex;
     flex-flow: column;
     justify-content: center;
-    width: 60%;
-    border: 1px solid white;
+    width: 55%;
+    border: 1px solid grey;
     padding: 10px;
     border-radius: 10px;
     margin-left: 450px;
     align-items: center;
     gap: 20px;
+    
 }
 
 

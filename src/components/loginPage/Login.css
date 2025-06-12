@@ -1,10 +1,10 @@
-.loginForm{
- display: flex;
+.loginForm {
+    display: flex;
     align-items: center;
     justify-content: center;
     flex-flow: column;
     margin-left: 500px;
-    border: 1px solid white;
+    border: 1px solid grey;
     border-radius: 8px;
     padding: 10px;
     text-align: center;
