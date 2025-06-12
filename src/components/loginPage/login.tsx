@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, googleProvider } from "../config/firebase";
-import { signInWithEmailAndPassword, signInWithPopup} from "firebase/auth";
+import { auth } from "../config/firebase";
+import { signInWithEmailAndPassword} from "firebase/auth";
 import { HOME_PATH, MAINPAGE_PATH } from "../../paths/Paths";
 import { setCurrentUser } from "../../store/Authentication/authSlice";
 import { useDispatch } from "react-redux";
@@ -29,14 +29,7 @@ export default function Login() {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-      navigate(MAINPAGE_PATH);
-    } catch (err: any) {
-      setError(err.message);
-    }
-  };
+
 
   return (
     <div className="loginForm">
@@ -64,7 +57,7 @@ export default function Login() {
       <Button onClick={handleEmailSignIn}>Log In</Button>
       <br />
 
-      <Button onClick={handleGoogleSignIn}>Sign in with Google</Button>
+  
       <Button onClick = {() => navigate(HOME_PATH)}>Back Home</Button>
     </div>
   );

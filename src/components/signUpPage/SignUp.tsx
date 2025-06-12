@@ -1,4 +1,4 @@
-import { Form, Input, Button } from "antd";
+import {  Input, Button } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { setEmail, setPassword } from "../../store/Authentication/authSlice";
 import { type AppDispatch, type RootState } from "../../store/store";
@@ -6,6 +6,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 import { MAINPAGE_PATH } from "../../paths/Paths";
+import "./SingUp.css";
+
 
 
 function SignUp() {
@@ -29,44 +31,32 @@ function SignUp() {
 
     return (
 
-        <>
-            <Form>
+        <div className="form">
 
-                <Form.Item
-                    name="email"
-                    rules={[{ required: true, message: "Please enter your email" }]}
-                >
-                    <Input
-                        placeholder="Enter your Email"
-                        value={email}
-                        onChange={(e) => dispatch(setEmail(e.target.value))}
+            <h2>Please fill out these forms to create your account</h2>
 
-                    />
+            <Input
+                className="Input"
+                placeholder="Enter your Email"
+                value={email}
+                onChange={(e) => dispatch(setEmail(e.target.value))}
+                style={{ width: 300 }}
+            />
 
-                </Form.Item>
+            <Input
+                className="Input"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => dispatch(setPassword(e.target.value))}
+                style={{ width: 300 }}
 
-                <Form.Item
-                    name="password"
-                    rules={[{ required: true, message: "Please enter your password" }]}
-                >
-                    <Input
-                        placeholder="Enter your password"
-                        value={password}
-                        onChange={(e) => dispatch(setPassword(e.target.value))}
-
-                    />
-
-                </Form.Item>
-
-
-                <Button onClick={handleAccountCreation}>Create an account</Button>
-
-
-            </Form>
+            />
 
 
 
-        </>
+            <Button onClick={handleAccountCreation}>Create an account</Button>
+
+        </div>
 
     )
 

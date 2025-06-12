@@ -5,8 +5,8 @@ import { createSlice, } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    email: " ",
-    password: " ",
+    email: "",
+    password: "",
     userToken: sessionStorage.getItem('userToken') || null,
 
 };

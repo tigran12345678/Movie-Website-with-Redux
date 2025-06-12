@@ -1,0 +1,17 @@
+.form{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    width: 60%;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 450px;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.Input input::placeholder {
+  color: #121413;
+}
